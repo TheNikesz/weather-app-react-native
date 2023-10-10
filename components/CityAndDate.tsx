@@ -1,10 +1,23 @@
 import { StyleSheet, View, Text } from "react-native";
+import { format } from "date-fns";
 
-export default function CityAndDate() {
+export default function CityAndDate({
+  city,
+  date,
+  isNight,
+}: {
+  city: string;
+  date: string;
+  isNight: boolean;
+}) {
   return (
     <View style={styles.cityAndDate}>
-      <Text style={styles.city}>Lublin</Text>
-      <Text style={styles.date}>Thu 28/09/23</Text>
+      <Text style={isNight ? [styles.city, styles.textNight] : styles.city}>
+        {city}
+      </Text>
+      <Text style={isNight ? [styles.date, styles.textNight] : styles.date}>
+        {format(new Date(date), "EEE dd/MM/yy")}
+      </Text>
     </View>
   );
 }
@@ -23,5 +36,9 @@ const styles = StyleSheet.create({
   date: {
     fontFamily: "Montserrat-Regular",
     fontSize: 16,
+  },
+
+  textNight: {
+    color: "#fefefe",
   },
 });

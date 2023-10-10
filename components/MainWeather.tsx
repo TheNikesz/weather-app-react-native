@@ -1,15 +1,48 @@
 import { StyleSheet, View, Text } from "react-native";
-import Icon from "@svgr-iconkit/weather-icons";
+import Weather from "../models/Weather";
+import getWeatherIcon from "../utils/getWeatherIcon";
+import getWeatherLabel from "../utils/getWeatherLabel";
 
-export default function MainWeather() {
+export default function MainWeather({
+  dailyWeather,
+  isNight,
+}: {
+  dailyWeather: Weather;
+  isNight: boolean;
+}) {
   return (
     <View style={styles.mainWeather}>
       <View style={styles.weather}>
-        <Icon style={styles.weatherIcon} name="day-sunny" />
-        <Text style={styles.weatherLabel}>Clear sky</Text>
+        {getWeatherIcon(
+          isNight ? styles.weatherIconNight : styles.weatherIcon,
+          isNight,
+          dailyWeather.weatherCode
+        )}
+        <Text
+          style={
+            isNight
+              ? [styles.weatherLabel, styles.textNight]
+              : styles.weatherLabel
+          }
+        >
+          {getWeatherLabel(dailyWeather.weatherCode)}
+        </Text>
       </View>
-      <View style={styles.verticalSeparator} />
-      <Text style={styles.temperature}>25°C</Text>
+      <View
+        style={
+          isNight ? styles.verticalSeparatorNight : styles.verticalSeparator
+        }
+      />
+      <Text
+        style={
+          isNight ? [styles.temperature, styles.textNight] : styles.temperature
+        }
+      >
+        {isNight
+          ? dailyWeather.minTemperature.toFixed()
+          : dailyWeather.maxTemperature.toFixed()}
+        °C
+      </Text>
     </View>
   );
 }
@@ -32,8 +65,20 @@ const styles = StyleSheet.create({
     height: 100,
   },
 
+  weatherIconNight: {
+    color: "#fefefe",
+    width: 100,
+    height: 100,
+  },
+
   verticalSeparator: {
     backgroundColor: "#ededed",
+    width: 3,
+    height: 180,
+  },
+
+  verticalSeparatorNight: {
+    backgroundColor: "#a3b4d1",
     width: 3,
     height: 180,
   },
@@ -46,5 +91,9 @@ const styles = StyleSheet.create({
   temperature: {
     fontFamily: "Montserrat-Medium",
     fontSize: 44,
+  },
+
+  textNight: {
+    color: "#fefefe",
   },
 });
