@@ -7,6 +7,7 @@ import { PaperProvider } from "react-native-paper";
 import NightWeatherSwitch from "./components/NightWeatherSwitch";
 import { useEffect, useState } from "react";
 import Weather from "./models/Weather";
+import CitySearch from "./components/CitySearch";
 
 export default function App() {
   const [isNight, setIsNight] = useState<boolean>(false);
@@ -66,6 +67,10 @@ export default function App() {
     setIsNight((prevIsNight: boolean) => !prevIsNight);
   }
 
+  function handlePress(citySearch: string) {
+    setCity(citySearch);
+  }
+
   if (status === "success") {
     return (
       <PaperProvider
@@ -74,6 +79,7 @@ export default function App() {
         }}
       >
         <View style={isNight ? [styles.app, styles.appNight] : styles.app}>
+          <CitySearch isNight={isNight} handlePress={handlePress} />
           <CityAndDate
             city={weatherForecast[0].city}
             date={weatherForecast[0].date}
@@ -81,7 +87,7 @@ export default function App() {
           />
           <MainWeather dailyWeather={weatherForecast[0]} isNight={isNight} />
           <NightWeatherSwitch isNight={isNight} handleChange={handleChange} />
-          <DailyWeatherList weeklyWeather={weatherForecast} isNight={isNight}/>
+          <DailyWeatherList weeklyWeather={weatherForecast} isNight={isNight} />
         </View>
       </PaperProvider>
     );
@@ -115,7 +121,7 @@ export default function App() {
 const styles = StyleSheet.create({
   app: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffff",
     justifyContent: "center",
   },
 

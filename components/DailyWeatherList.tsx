@@ -58,6 +58,7 @@ function DailyWeather({
 const styles = StyleSheet.create({
   dailyWeatherList: {
     marginHorizontal: 20,
+    marginBottom: 20,
   },
 
   dailyWeather: {
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    borderRadius: 20,
+    borderRadius: 10,
     paddingVertical: 16,
     paddingHorizontal: 20,
     marginVertical: 5,
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    borderRadius: 20,
+    borderRadius: 10,
     paddingVertical: 16,
     paddingHorizontal: 20,
     marginVertical: 5,

@@ -51,10 +51,13 @@ const styles = StyleSheet.create({
   mainWeather: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
+    marginHorizontal: 36,
+    marginBottom: 10,
   },
 
   weather: {
+    width: 120,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -74,13 +77,13 @@ const styles = StyleSheet.create({
   verticalSeparator: {
     backgroundColor: "#ededed",
     width: 3,
-    height: 180,
+    height: 135,
   },
 
   verticalSeparatorNight: {
     backgroundColor: "#a3b4d1",
     width: 3,
-    height: 180,
+    height: 135,
   },
 
   weatherLabel: {
@@ -89,6 +92,7 @@ const styles = StyleSheet.create({
   },
 
   temperature: {
+    width: 120,
     fontFamily: "Montserrat-Medium",
     fontSize: 44,
   },

@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
   cityAndDate: {
     alignItems: "center",
     justifyContent: "center",
+    marginBottom: 20,
   },
 
   city: {
