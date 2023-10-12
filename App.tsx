@@ -3,11 +3,12 @@ import CityAndDate from "./components/CityAndDate";
 import { useFonts } from "expo-font";
 import MainWeather from "./components/MainWeather";
 import DailyWeatherList from "./components/DailyWeatherList";
-import { PaperProvider } from "react-native-paper";
+import { ActivityIndicator, PaperProvider } from "react-native-paper";
 import NightWeatherSwitch from "./components/NightWeatherSwitch";
 import { useEffect, useState } from "react";
 import Weather from "./models/Weather";
 import CitySearch from "./components/CitySearch";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 export default function App() {
   const [isNight, setIsNight] = useState<boolean>(false);
@@ -99,7 +100,11 @@ export default function App() {
         }}
       >
         <View style={isNight ? [styles.app, styles.appNight] : styles.app}>
-          <Text>Loading...</Text>
+          <ActivityIndicator
+            animating={true}
+            color={isNight ? "#fefefe" : "#020202"}
+            size="large"
+          />
         </View>
       </PaperProvider>
     );
@@ -111,7 +116,24 @@ export default function App() {
         }}
       >
         <View style={isNight ? [styles.app, styles.appNight] : styles.app}>
-          <Text>Error...</Text>
+          <View style={styles.error}>
+            <Icon
+              style={isNight ? styles.errorIconNight : styles.errorIcon}
+              name="error-outline"
+              size={80}
+            />
+            <Text
+              style={
+                isNight
+                  ? [styles.errorText, styles.errorTextNight]
+                  : styles.errorText
+              }
+            >
+              Something went wrong while fetching the weather forecast. Please
+              enter a new city or try again later.
+            </Text>
+            <CitySearch isNight={isNight} handlePress={handlePress} />
+          </View>
         </View>
       </PaperProvider>
     );
@@ -127,5 +149,33 @@ const styles = StyleSheet.create({
 
   appNight: {
     backgroundColor: "#6b8cc6",
+  },
+
+  error: {
+    alignItems: "stretch",
+    justifyContent: "center",
+  },
+
+  errorIcon: {
+    textAlign: "center",
+    color: "#020202",
+    marginBottom: 10,
+  },
+
+  errorIconNight: {
+    textAlign: "center",
+    color: "#fefefe",
+  },
+
+  errorText: {
+    textAlign: "center",
+    fontFamily: "Montserrat-Regular",
+    fontSize: 18,
+    marginHorizontal: 30,
+    marginBottom: -20,
+  },
+
+  errorTextNight: {
+    color: "#fefefe",
   },
 });
