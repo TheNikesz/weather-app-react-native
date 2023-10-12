@@ -6,7 +6,7 @@ Weather application built in React Native.
 
 * TypeScript: 5.1.3
 * React: 18.2.0
-* React Native": 0.72.5,
+* React Native: 0.72.5,
 * React Native Paper: 5.10.6,
 * Expo: 49.0.13,
 
